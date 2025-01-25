@@ -1,21 +1,20 @@
 using System;
 
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
 
 public class Treasure : MonoBehaviour
 {
-  private SpriteRenderer _spriteRenderer;
-  public Sprite openSprite;
-
-  private void Start() => _spriteRenderer = GetComponent<SpriteRenderer>();
-
-  private void OnTriggerEnter2D(Collider2D other)
+  public int goldAmount;
+  private void OnTriggerEnter2D(Collider2D collider2d)
   {
-    if (other.CompareTag("Player"))
-    {
-      _spriteRenderer.sprite = openSprite;
-    }
+    Debug.Log("Player entered treasure");
+    if (!collider2d.CompareTag("Player")) return;
+    var player = collider2d.GetComponent<Player>();
+    player.inventory.Add(gameObject);
+    player.gold += goldAmount;
+    DisableCollision();
   }
+
+  private void DisableCollision() => GetComponent<Collider2D>().enabled = false;
 }
