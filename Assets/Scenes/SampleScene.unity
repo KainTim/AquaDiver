@@ -1822,7 +1822,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.507, y: -33.8, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40201,7 +40201,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2635562504269445475, guid: 3c6066fc9d6d6d446a784324fbf4126b, type: 3}
       propertyPath: m_Name
-      value: TreasureChest (1)
+      value: BottomChest
       objectReference: {fileID: 0}
     - target: {fileID: 4671506926442211770, guid: 3c6066fc9d6d6d446a784324fbf4126b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40305,7 +40305,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2635562504269445475, guid: 3c6066fc9d6d6d446a784324fbf4126b, type: 3}
       propertyPath: m_Name
-      value: TreasureChest
+      value: TopChest
       objectReference: {fileID: 0}
     - target: {fileID: 4671506926442211770, guid: 3c6066fc9d6d6d446a784324fbf4126b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40366,11 +40366,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3879635945937790011, guid: 7b43552d39414c5489e72e0732296fb1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.507
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3879635945937790011, guid: 7b43552d39414c5489e72e0732296fb1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3879635945937790011, guid: 7b43552d39414c5489e72e0732296fb1, type: 3}
       propertyPath: m_LocalPosition.z
