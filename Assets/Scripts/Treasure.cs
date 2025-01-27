@@ -10,7 +10,7 @@ public class Treasure : MonoBehaviour
   {
     Debug.Log("Player entered treasure");
     if (!collider2d.CompareTag("Player")) return;
-    var player = collider2d.GetComponent<Player>();
+    var player = collider2d.GetComponent<Inventory>(););
     player.inventory.Add(gameObject);
     player.gold += goldAmount;
     DisableCollision();
