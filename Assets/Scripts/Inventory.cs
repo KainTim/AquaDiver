@@ -25,6 +25,7 @@ public class Inventory : MonoBehaviour
     InputSystem.actions.FindAction("Hotbar 8").performed += Hotbar8;
     InputSystem.actions.FindAction("Hotbar 9").performed += Hotbar9;
     InputSystem.actions.FindAction("Hotbar 10").performed += Hotbar10;
+    InputSystem.actions.FindAction("Interact").performed += FireWeapon;
   }
 
   private void Hotbar1(InputAction.CallbackContext context) => SelectItem(0);
@@ -37,6 +38,15 @@ public class Inventory : MonoBehaviour
   private void Hotbar8(InputAction.CallbackContext context) => SelectItem(7);
   private void Hotbar9(InputAction.CallbackContext context) => SelectItem(8);
   private void Hotbar10(InputAction.CallbackContext context) => SelectItem(9);
+  private void FireWeapon(InputAction.CallbackContext context) {
+    Debug.Log("Firing weapon");
+    if (_selectedItem == null) return;
+    Debug.Log("Selected item is not null");
+    if (_selectedItem.TryGetComponent(out Weapon weapon))
+    {
+      weapon.Fire();
+    };
+}
 
 
   private void SelectItem(int index)
