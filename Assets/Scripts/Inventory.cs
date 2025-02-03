@@ -10,6 +10,9 @@ public class Inventory : MonoBehaviour
   private readonly Dictionary<GameObject, SpriteRenderer> _inventoryRenderers = new();
   private GameObject _selectedItem;
   public int gold;
+  private PlayerInput playerInput;
+  private InputAction interactAction;
+
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
@@ -25,6 +28,11 @@ public class Inventory : MonoBehaviour
     InputSystem.actions.FindAction("Hotbar 8").performed += Hotbar8;
     InputSystem.actions.FindAction("Hotbar 9").performed += Hotbar9;
     InputSystem.actions.FindAction("Hotbar 10").performed += Hotbar10;
+
+    playerInput = GetComponent<PlayerInput>();
+    interactAction = playerInput.actions["Interact"];
+
+    interactAction.performed += FireWeapon;
     InputSystem.actions.FindAction("Interact").performed += FireWeapon;
   }
 
@@ -39,9 +47,7 @@ public class Inventory : MonoBehaviour
   private void Hotbar9(InputAction.CallbackContext context) => SelectItem(8);
   private void Hotbar10(InputAction.CallbackContext context) => SelectItem(9);
   private void FireWeapon(InputAction.CallbackContext context) {
-    Debug.Log("Firing weapon");
     if (_selectedItem == null) return;
-    Debug.Log("Selected item is not null");
     if (_selectedItem.TryGetComponent(out Weapon weapon))
     {
       weapon.Fire();
@@ -76,10 +82,23 @@ public class Inventory : MonoBehaviour
         _inventoryRenderers[o].enabled = true;
         continue;
       }
-      {
-        Debug.Log("Adding renderer");
+      { 
         _inventoryRenderers.Add(o, o.GetComponent<SpriteRenderer>());
       }
     }
+  }
+  private void OnDestroy()
+  {
+    InputSystem.actions.FindAction("Hotbar 1").performed -= Hotbar1;
+    InputSystem.actions.FindAction("Hotbar 2").performed -= Hotbar2;
+    InputSystem.actions.FindAction("Hotbar 3").performed -= Hotbar3;
+    InputSystem.actions.FindAction("Hotbar 4").performed -= Hotbar4;
+    InputSystem.actions.FindAction("Hotbar 5").performed -= Hotbar5;
+    InputSystem.actions.FindAction("Hotbar 6").performed -= Hotbar6;
+    InputSystem.actions.FindAction("Hotbar 7").performed -= Hotbar7;
+    InputSystem.actions.FindAction("Hotbar 8").performed -= Hotbar8;
+    InputSystem.actions.FindAction("Hotbar 9").performed -= Hotbar9;
+    InputSystem.actions.FindAction("Hotbar 10").performed -= Hotbar10;
+    interactAction.performed -= FireWeapon;
   }
 }
