@@ -9,11 +9,14 @@ public class EnemyAi : MonoBehaviour
   public int health = 2;
 
   private Transform player; // Reference to the player
+  private float maxSpeed = 5f;
+  private Rigidbody2D rb;
 
   private void Start()
   {
     // Find the player by tag
     player = GameObject.FindGameObjectWithTag("Player").transform;
+    rb = GetComponent<Rigidbody2D>();
   }
 
   private void Update()
@@ -35,19 +38,24 @@ public class EnemyAi : MonoBehaviour
     // Calculate direction toward the player
     Vector2 direction = (player.position - transform.position).normalized;
 
-    Debug.Log($"Moving towards:{player.position-transform.position.normalized}");
+    // Calculate the force to apply to move the enemy toward the player
+    Vector2 force = direction * speed;
 
-    // Move the enemy toward the player
-    transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-    Debug.Log($"Moving with speed:{speed * Time.deltaTime}");
+    // Limit the speed to the maximum speed
+    if (rb.linearVelocity.magnitude > maxSpeed)
+    {
+      rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+    }
+
+    // Apply the force to the enemy's rigidbody
+    rb.AddForce(force);
+
   }
   private void OnTriggerEnter2D(Collider2D collision)
   {
-    Debug.Log("Collision detected");
     // Check if the enemy collided with a bullet
     if (collision.CompareTag("Bullet"))
     {
-      Debug.Log("Bullet hit enemy");
       Hurt(collision.gameObject.GetComponent<Bullet>().damage);
       Destroy(collision.gameObject); // Destroy the bullet
     }
