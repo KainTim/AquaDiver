@@ -20,6 +20,6 @@ public class Weapon : MonoBehaviour
 
     // Instantiate bullet and fire it
     GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-    bullet.GetComponent<Bullet>().Fire(direction);
+    bullet.GetComponent<Bullet>().Fire(direction, bulletSpeed);
   }
 }

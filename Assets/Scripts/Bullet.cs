@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-  public float speed = 20f;
   public float lifetime = 3f;
   public int damage = 1;
 
@@ -11,7 +10,7 @@ public class Bullet : MonoBehaviour
     Destroy(gameObject, lifetime); // Destroy bullet after X seconds
   }
 
-  public void Fire(Vector3 direction)
+  public void Fire(Vector3 direction, float speed)
   {
     GetComponent<Rigidbody2D>().linearVelocity = direction * speed;
   }
