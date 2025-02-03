@@ -82,7 +82,8 @@ public class Inventory : MonoBehaviour
         _inventoryRenderers[o].enabled = true;
         continue;
       }
-      { 
+      {
+        _selectedItem = o;
         _inventoryRenderers.Add(o, o.GetComponent<SpriteRenderer>());
       }
     }

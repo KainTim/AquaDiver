@@ -1,9 +1,12 @@
+using System;
+
 using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
   public float detectionRadius = 5f; // Radius to detect the player
   public float speed = 2f; // Movement speed
+  public int health = 2;
 
   private Transform player; // Reference to the player
 
@@ -32,8 +35,11 @@ public class EnemyAi : MonoBehaviour
     // Calculate direction toward the player
     Vector2 direction = (player.position - transform.position).normalized;
 
+    Debug.Log($"Moving towards:{player.position-transform.position.normalized}");
+
     // Move the enemy toward the player
     transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+    Debug.Log($"Moving with speed:{speed * Time.deltaTime}");
   }
   private void OnTriggerEnter2D(Collider2D collision)
   {
@@ -42,8 +48,17 @@ public class EnemyAi : MonoBehaviour
     if (collision.CompareTag("Bullet"))
     {
       Debug.Log("Bullet hit enemy");
-      Destroy(gameObject); // Destroy the enemy
+      Hurt(collision.gameObject.GetComponent<Bullet>().damage);
       Destroy(collision.gameObject); // Destroy the bullet
+    }
+  }
+
+  private void Hurt(int damage)
+  {
+    health-=damage;
+    if (health <= 0)
+    {
+      Destroy(gameObject);
     }
   }
 
